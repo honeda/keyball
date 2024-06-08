@@ -20,6 +20,27 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "quantum.h"
 
+enum custom_keycodes {
+    USER1 = SAFE_RANGE,
+};
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case USER1:
+            if (record->event.pressed) {
+                // USER1キーが押された時の処理
+                keyball_set_scroll_mode(true);
+            } else {
+                // USER1キーが離された時の処理
+                keyball_set_scroll_mode(false);
+            }
+            return false; // このキーコードのデフォルト処理をスキップ
+        default:
+            return true; // 他のキーコードはデフォルト処理を行う
+    }
+}
+
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // keymap for default (VIA)

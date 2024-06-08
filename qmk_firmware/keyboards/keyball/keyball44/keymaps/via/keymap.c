@@ -21,17 +21,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "quantum.h"
 
 enum custom_keycodes {
-    USER1 = SAFE_RANGE,
+    KC_MY_SCROLL = SAFE_RANGE,  // REMAPでは上から順にUSER0, USER1,,,
+    //KC_MY___,  // 以降は`SAFE_RANGE`は不要
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case USER1:
+        case KC_MY_SCROLL:
             if (record->event.pressed) {
-                // USER1キーが押された時の処理
+                // KC_MY_SCROLLキーが押された時の処理
                 keyball_set_scroll_mode(true);
             } else {
-                // USER1キーが離された時の処理
+                // KC_MY_SCROLLキーが離された時の処理
                 keyball_set_scroll_mode(false);
             }
             return false; // このキーコードのデフォルト処理をスキップ
